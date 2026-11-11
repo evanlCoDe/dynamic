@@ -330,12 +330,32 @@
         font-size: 11px;
       }
 
+      .hero-video-frame {
+        position: relative;
+        width: min(920px, 100%);
+        margin: 69px auto 0;
+      }
+
+      .hero-video-frame::after {
+        position: absolute;
+        inset: auto 16px 0 0;
+        height: 24%;
+        background: linear-gradient(to bottom, transparent, rgba(9, 10, 13, 0.18));
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        content: "";
+        mask-image: linear-gradient(to bottom, transparent, #000 70%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, #000 70%);
+        pointer-events: none;
+      }
+
       .hero-video {
         display: block;
-        width: min(920px, 100%);
+        width: 100%;
         height: auto;
-        margin: 69px auto 0;
         clip-path: inset(0 16px 0 0);
+        mask-image: linear-gradient(to bottom, #000 68%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, #000 68%, transparent 100%);
         background: #000;
       }
 
@@ -585,6 +605,7 @@
 
       .privacy {
         padding-top: 0;
+        padding-bottom: 0;
       }
 
       .privacy-card {
@@ -635,6 +656,129 @@
         font-size: 29px;
       }
 
+      .free-forever-section {
+        padding: 72px 24px 112px;
+      }
+
+      .free-forever-panel {
+        display: grid;
+        width: min(1020px, 100%);
+        min-height: 340px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: center;
+        gap: clamp(36px, 7vw, 88px);
+        margin: 0 auto;
+        padding: clamp(30px, 6vw, 72px);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        background:
+          radial-gradient(ellipse at 12% 0%, rgba(255, 255, 255, 0.08), transparent 56%),
+          linear-gradient(145deg, #20232b, #121319);
+      }
+
+      .free-forever-card-wrap {
+        display: grid;
+        min-width: 0;
+        place-items: center;
+        perspective: 1000px;
+      }
+
+      .free-forever-card {
+        position: relative;
+        width: min(100%, 370px);
+        aspect-ratio: 1.586;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 24px;
+        background:
+          radial-gradient(ellipse at 18% 0%, rgba(255, 255, 255, 0.26), transparent 48%),
+          linear-gradient(142deg, #555a62, #292e36);
+        box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+        color: #f4f5f7;
+        transform: perspective(900px);
+        transition: transform 450ms cubic-bezier(0.2, 0.75, 0.25, 1), box-shadow 450ms ease;
+      }
+
+      .free-forever-card:hover {
+        box-shadow: 0 36px 68px -28px rgba(0, 0, 0, 0.82), inset 0 1px 0 rgba(255, 255, 255, 0.38);
+        transform: perspective(900px) rotateX(2deg) rotateY(-3deg) translateY(-4px);
+      }
+
+      .free-forever-card::before {
+        position: absolute;
+        top: 28%;
+        right: 0;
+        left: 0;
+        height: 17%;
+        border-block: 1px solid rgba(255, 255, 255, 0.12);
+        background: linear-gradient(180deg, #252830, #1d2027 52%, #252830);
+        content: "";
+      }
+
+      .free-forever-card-content {
+        position: absolute;
+        inset: 9% 9% 8%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .free-forever-card-brand,
+      .free-forever-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .free-forever-card-brand {
+        font-size: 1.1rem;
+        font-weight: 650;
+        letter-spacing: -0.045em;
+      }
+
+      .free-forever-card-mark {
+        color: #a9c5ff;
+        font-size: 1.35rem;
+      }
+
+      .free-forever-card-free {
+        align-self: flex-start;
+        margin-top: auto;
+        margin-bottom: 10px;
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-align: left;
+      }
+
+      .free-forever-card-footer {
+        color: rgba(244, 245, 247, 0.72);
+        font-size: 0.55rem;
+        font-weight: 650;
+        letter-spacing: 0.15em;
+      }
+
+      .free-forever-copy {
+        max-width: 420px;
+      }
+
+      .free-forever-copy h2 {
+        margin: 0;
+        font-size: clamp(2.7rem, 5vw, 4.5rem);
+        letter-spacing: -0.065em;
+        line-height: 0.98;
+      }
+
+      .free-forever-copy p {
+        max-width: 360px;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        line-height: 1.5;
+      }
+
       .site-footer {
         display: flex;
         width: min(1020px, calc(100% - 48px));
@@ -670,7 +814,7 @@
           padding-top: 80px;
         }
 
-        .hero-video {
+        .hero-video-frame {
           margin-top: 58px;
         }
 
@@ -692,6 +836,26 @@
 
         .privacy-card {
           padding: 26px;
+        }
+
+        .free-forever-section {
+          padding: 72px 20px 84px;
+        }
+
+        .free-forever-panel {
+          min-height: 0;
+          grid-template-columns: 1fr;
+          gap: 30px;
+          padding: clamp(28px, 8vw, 44px) 22px;
+        }
+
+        .free-forever-copy {
+          text-align: center;
+        }
+
+        .free-forever-copy p {
+          margin-right: auto;
+          margin-left: auto;
         }
 
         .dialog-content {
@@ -747,7 +911,7 @@
       <nav class="nav" aria-label="Main navigation">
         <a class="wordmark" href="#" aria-label="Dynamic home">
           <img class="wordmark-mark" src="dynamic-logo.png" alt="" aria-hidden="true" />
-          <span>dynamic</span>
+          <span>Dynamic</span>
         </a>
         <div class="nav-links">
           <button class="nav-cta" type="button" data-download-open>Download Dynamic</button>
@@ -769,16 +933,18 @@
         </div>
         <p class="demo-caption">An independent software concept for MacBook Pro. Not affiliated with Apple.</p>
 
-        <video
-          class="hero-video"
-          src="dynamic-island-loop.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-          aria-label="A looping Dynamic Island music activity demo"
-        ></video>
+        <div class="hero-video-frame">
+          <video
+            class="hero-video"
+            src="dynamic-island-loop.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            aria-label="A looping Dynamic Island music activity demo"
+          ></video>
+        </div>
       </section>
 
       <section class="section preview" id="preview" aria-labelledby="preview-title">
@@ -856,6 +1022,30 @@
               <p>Dynamic is imagined as a lightweight, on-device companion. Your activity stays yours — no account, tracking, or cloud sync required.</p>
             </div>
             <div class="privacy-mark" aria-hidden="true">⌑</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="free-forever-section" aria-labelledby="free-forever-title">
+        <div class="free-forever-panel">
+          <div class="free-forever-card-wrap">
+            <div class="free-forever-card" role="img" aria-label="Dynamic card with masked number ending in 4827">
+              <div class="free-forever-card-content">
+                <div class="free-forever-card-brand">
+                  <span>Dynamic</span>
+                  <span class="free-forever-card-mark" aria-hidden="true">✦</span>
+                </div>
+                <div class="free-forever-card-free">•••• •••• •••• 4827</div>
+                <div class="free-forever-card-footer">
+                  <span>NO SUBSCRIPTION</span>
+                  <span>FOREVER</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="free-forever-copy">
+            <h2 id="free-forever-title">Free. Forever.</h2>
+            <p>No subscriptions. No hidden fees.</p>
           </div>
         </div>
       </section>
