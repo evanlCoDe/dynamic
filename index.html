@@ -335,6 +335,7 @@
         width: min(920px, 100%);
         height: auto;
         margin: 69px auto 0;
+        clip-path: inset(0 16px 0 0);
         background: #000;
       }
 
@@ -397,11 +398,22 @@
         height: auto;
         align-self: stretch;
         object-fit: cover;
+        clip-path: inset(0 16px 0 0);
       }
 
       .preview-stage[data-mode="music"] .music-preview-video,
       .preview-stage[data-mode="indicator"] .indicator-preview-video {
         display: block;
+      }
+
+      .preview-stage:is([data-mode="music"], [data-mode="indicator"]) {
+        width: calc(100% - 16px);
+        justify-content: flex-start;
+        margin-inline: auto;
+      }
+
+      .preview-stage:is([data-mode="music"], [data-mode="indicator"]) .preview-video {
+        width: calc(100% + 16px);
       }
 
       .preview-stage:is([data-mode="music"], [data-mode="indicator"]) .preview-island {
