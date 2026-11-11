@@ -423,29 +423,31 @@
 
       .preview-stage[data-mode="music"] .music-preview-video,
       .preview-stage[data-mode="indicator"] .indicator-preview-video,
-      .preview-stage[data-mode="privacy"] .privacy-preview-video {
+      .preview-stage[data-mode="privacy"] .privacy-preview-video,
+      .preview-stage[data-mode="battery"] .battery-preview-video {
         display: block;
       }
 
-      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"]) {
+      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="battery"]) {
         width: min(100%, 900px);
         min-height: 0;
         aspect-ratio: 2368 / 1080;
         margin-inline: auto;
       }
 
-      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"]) .preview-island {
+      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="battery"]) .preview-island {
         display: none;
       }
 
-      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"])::before,
-      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"])::after {
+      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="battery"])::before,
+      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="battery"])::after {
         display: none;
       }
 
       .preview-stage:not([data-mode="music"]) .music-preview-video,
       .preview-stage:not([data-mode="indicator"]) .indicator-preview-video,
-      .preview-stage:not([data-mode="privacy"]) .privacy-preview-video {
+      .preview-stage:not([data-mode="privacy"]) .privacy-preview-video,
+      .preview-stage:not([data-mode="battery"]) .battery-preview-video {
         display: none;
       }
 
@@ -994,6 +996,16 @@
               preload="metadata"
               aria-label="Privacy activity displayed in Dynamic"
             ></video>
+            <video
+              class="preview-video battery-preview-video"
+              src="battery-island.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label="Battery status displayed in Dynamic"
+            ></video>
             <div class="preview-island" aria-live="polite">
               <div class="island-art" data-preview-icon>♫</div>
               <div class="island-copy">
@@ -1007,6 +1019,7 @@
             <button class="demo-tab" type="button" data-mode="music" aria-pressed="true">♫ &nbsp; Music</button>
             <button class="demo-tab" type="button" data-mode="indicator" aria-pressed="false">◉ &nbsp; Indicator</button>
             <button class="demo-tab" type="button" data-mode="privacy" aria-pressed="false"><svg class="demo-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v7V4a1.5 1.5 0 0 1 3 0v8V5a1.5 1.5 0 0 1 3 0v8V8a1.5 1.5 0 0 1 3 0v7a8 8 0 0 1-8 8h-.5a7.5 7.5 0 0 1-6.7-4.1l-2.1-4.1a1.7 1.7 0 0 1 3.1-1.5L8 16"/></svg>&nbsp; Privacy</button>
+            <button class="demo-tab" type="button" data-mode="battery" aria-pressed="false"><svg class="demo-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m13.5 2.5-9 11h7l-1 8 9-11h-7z"/></svg>&nbsp; Battery</button>
           </div>
         </div>
       </section>
@@ -1110,6 +1123,12 @@
           detail: "Private by design",
           action: "•••",
         },
+        battery: {
+          icon: "⚡",
+          title: "Battery",
+          detail: "Power connected",
+          action: "85%",
+        },
       };
 
       const buttons = document.querySelectorAll(".demo-tab");
@@ -1118,6 +1137,7 @@
         music: document.querySelector(".music-preview-video"),
         indicator: document.querySelector(".indicator-preview-video"),
         privacy: document.querySelector(".privacy-preview-video"),
+        battery: document.querySelector(".battery-preview-video"),
       };
       let isPreviewVisible = false;
 
