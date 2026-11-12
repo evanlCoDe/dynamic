@@ -438,32 +438,36 @@
       }
 
       .preview-stage[data-mode="music"] .music-preview-video,
+      .preview-stage[data-mode="wifi"] .wifi-preview-video,
       .preview-stage[data-mode="indicator"] .indicator-preview-video,
       .preview-stage[data-mode="privacy"] .privacy-preview-video,
+      .preview-stage[data-mode="caplock"] .caplock-preview-video,
       .preview-stage[data-mode="battery"] .battery-preview-video,
       .preview-stage[data-mode="bluetooth"] .bluetooth-preview-video {
         display: block;
       }
 
-      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="battery"], [data-mode="bluetooth"]) {
+      .preview-stage:is([data-mode="music"], [data-mode="wifi"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="caplock"], [data-mode="battery"], [data-mode="bluetooth"]) {
         width: min(100%, 900px);
         min-height: 0;
         aspect-ratio: 2368 / 1080;
         margin-inline: auto;
       }
 
-      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="battery"], [data-mode="bluetooth"]) .preview-island {
+      .preview-stage:is([data-mode="music"], [data-mode="wifi"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="caplock"], [data-mode="battery"], [data-mode="bluetooth"]) .preview-island {
         display: none;
       }
 
-      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="battery"], [data-mode="bluetooth"])::before,
-      .preview-stage:is([data-mode="music"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="battery"], [data-mode="bluetooth"])::after {
+      .preview-stage:is([data-mode="music"], [data-mode="wifi"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="caplock"], [data-mode="battery"], [data-mode="bluetooth"])::before,
+      .preview-stage:is([data-mode="music"], [data-mode="wifi"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="caplock"], [data-mode="battery"], [data-mode="bluetooth"])::after {
         display: none;
       }
 
       .preview-stage:not([data-mode="music"]) .music-preview-video,
+      .preview-stage:not([data-mode="wifi"]) .wifi-preview-video,
       .preview-stage:not([data-mode="indicator"]) .indicator-preview-video,
       .preview-stage:not([data-mode="privacy"]) .privacy-preview-video,
+      .preview-stage:not([data-mode="caplock"]) .caplock-preview-video,
       .preview-stage:not([data-mode="battery"]) .battery-preview-video,
       .preview-stage:not([data-mode="bluetooth"]) .bluetooth-preview-video {
         display: none;
@@ -510,6 +514,7 @@
         width: 54px;
         height: 54px;
         border-radius: 16px;
+        color: #a5c4ff;
         font-size: 22px;
       }
 
@@ -577,8 +582,8 @@
       }
 
       .demo-tab-icon {
-        width: 15px;
-        height: 15px;
+        width: 16.5px;
+        height: 16.5px;
         vertical-align: -3px;
       }
 
@@ -586,7 +591,7 @@
       .demo-tab[aria-pressed="true"] {
         border-color: rgba(137, 175, 255, 0.48);
         background: rgba(102, 151, 245, 0.13);
-        color: #eaf1ff;
+        color: #a5c4ff;
       }
 
       .feature-grid {
@@ -1026,6 +1031,16 @@
               aria-label="Music playback displayed in Dynamic"
             ></video>
             <video
+              class="preview-video wifi-preview-video"
+              src="wifi.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label="Wi-Fi activity displayed in Dynamic"
+            ></video>
+            <video
               class="preview-video indicator-preview-video"
               src="island-indicator.mp4"
               autoplay
@@ -1046,16 +1061,6 @@
               aria-label="Privacy activity displayed in Dynamic"
             ></video>
             <video
-              class="preview-video battery-preview-video"
-              src="battery-island.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-label="Battery status displayed in Dynamic"
-            ></video>
-            <video
               class="preview-video bluetooth-preview-video"
               src="bluetooth.mp4"
               autoplay
@@ -1064,6 +1069,26 @@
               playsinline
               preload="metadata"
               aria-label="Bluetooth status displayed in Dynamic"
+            ></video>
+            <video
+              class="preview-video caplock-preview-video"
+              src="caplock.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label="Caps Lock status displayed in Dynamic"
+            ></video>
+            <video
+              class="preview-video battery-preview-video"
+              src="battery-island.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label="Battery status displayed in Dynamic"
             ></video>
             <div class="preview-island" aria-live="polite">
               <div class="island-art" data-preview-icon>♫</div>
@@ -1076,10 +1101,12 @@
           </div>
           <div class="demo-controls" role="group" aria-label="Choose a Dynamic preview">
             <button class="demo-tab" type="button" data-mode="music" aria-pressed="true">♫ &nbsp; Music</button>
+            <button class="demo-tab" type="button" data-mode="wifi" aria-pressed="false"><svg class="demo-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8.5a15 15 0 0 1 19 0M5.5 12a10 10 0 0 1 13 0M8.5 15.5a5 5 0 0 1 7 0"/><path d="M12 19h.01"/></svg>&nbsp; Wi-Fi</button>
+            <button class="demo-tab" type="button" data-mode="bluetooth" aria-pressed="false"><svg class="demo-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7 10 10-5 5V2l5 5L7 17"/></svg>&nbsp; Bluetooth</button>
+            <button class="demo-tab" type="button" data-mode="caplock" aria-pressed="false">⇪ &nbsp; Caps Lock</button>
+            <button class="demo-tab" type="button" data-mode="battery" aria-pressed="false"><svg class="demo-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m13.5 2.5-9 11h7l-1 8 9-11h-7z"/></svg>&nbsp; Battery</button>
             <button class="demo-tab" type="button" data-mode="indicator" aria-pressed="false">◉ &nbsp; Indicator</button>
             <button class="demo-tab" type="button" data-mode="privacy" aria-pressed="false"><svg class="demo-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v7V4a1.5 1.5 0 0 1 3 0v8V5a1.5 1.5 0 0 1 3 0v8V8a1.5 1.5 0 0 1 3 0v7a8 8 0 0 1-8 8h-.5a7.5 7.5 0 0 1-6.7-4.1l-2.1-4.1a1.7 1.7 0 0 1 3.1-1.5L8 16"/></svg>&nbsp; Privacy</button>
-            <button class="demo-tab" type="button" data-mode="battery" aria-pressed="false"><svg class="demo-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m13.5 2.5-9 11h7l-1 8 9-11h-7z"/></svg>&nbsp; Battery</button>
-            <button class="demo-tab" type="button" data-mode="bluetooth" aria-pressed="false"><svg class="demo-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7 10 10-5 5V2l5 5L7 17"/></svg>&nbsp; Bluetooth</button>
           </div>
         </div>
       </section>
@@ -1173,6 +1200,12 @@
           detail: "Midnight City · M83",
           action: "Ⅱ &nbsp;›",
         },
+        wifi: {
+          icon: "⌁",
+          title: "Wi-Fi",
+          detail: "Connected",
+          action: "•••",
+        },
         indicator: {
           icon: "◉",
           title: "Indicator",
@@ -1184,6 +1217,12 @@
           title: "Privacy",
           detail: "Private by design",
           action: "•••",
+        },
+        caplock: {
+          icon: "⇪",
+          title: "Caps Lock",
+          detail: "On",
+          action: "On",
         },
         battery: {
           icon: "⚡",
@@ -1203,8 +1242,10 @@
       const previewStage = document.querySelector(".preview-stage");
       const previewVideos = {
         music: document.querySelector(".music-preview-video"),
+        wifi: document.querySelector(".wifi-preview-video"),
         indicator: document.querySelector(".indicator-preview-video"),
         privacy: document.querySelector(".privacy-preview-video"),
+        caplock: document.querySelector(".caplock-preview-video"),
         battery: document.querySelector(".battery-preview-video"),
         bluetooth: document.querySelector(".bluetooth-preview-video"),
       };
