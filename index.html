@@ -451,23 +451,36 @@
           linear-gradient(135deg, #191b24, #101116 60%);
       }
 
-      .preview-video {
-        display: none;
+      .preview-media {
         position: absolute;
         inset: 0;
+        z-index: 0;
+      }
+
+      .preview-video {
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 450ms ease;
       }
 
-      .preview-stage[data-mode="music"] .music-preview-video,
-      .preview-stage[data-mode="wifi"] .wifi-preview-video,
-      .preview-stage[data-mode="indicator"] .indicator-preview-video,
-      .preview-stage[data-mode="privacy"] .privacy-preview-video,
-      .preview-stage[data-mode="caplock"] .caplock-preview-video,
-      .preview-stage[data-mode="battery"] .battery-preview-video,
-      .preview-stage[data-mode="bluetooth"] .bluetooth-preview-video {
-        display: block;
+      .preview-video.is-active,
+      .preview-video.is-next {
+        opacity: 1;
+      }
+
+      .preview-video.is-active {
+        z-index: 1;
+      }
+
+      .preview-video.is-next {
+        z-index: 2;
       }
 
       .preview-stage:is([data-mode="music"], [data-mode="wifi"], [data-mode="indicator"], [data-mode="privacy"], [data-mode="caplock"], [data-mode="battery"], [data-mode="bluetooth"]) {
@@ -486,14 +499,106 @@
         display: none;
       }
 
-      .preview-stage:not([data-mode="music"]) .music-preview-video,
-      .preview-stage:not([data-mode="wifi"]) .wifi-preview-video,
-      .preview-stage:not([data-mode="indicator"]) .indicator-preview-video,
-      .preview-stage:not([data-mode="privacy"]) .privacy-preview-video,
-      .preview-stage:not([data-mode="caplock"]) .caplock-preview-video,
-      .preview-stage:not([data-mode="battery"]) .battery-preview-video,
-      .preview-stage:not([data-mode="bluetooth"]) .bluetooth-preview-video {
-        display: none;
+      .preview-gallery-label {
+        position: absolute;
+        z-index: 2;
+        top: 16px;
+        left: 18px;
+        padding: 7px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        background: rgba(8, 9, 12, 0.7);
+        color: #f5f5f7;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .preview-arrow {
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        display: grid;
+        width: 46px;
+        height: 46px;
+        place-items: center;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 50%;
+        background: rgba(10, 11, 15, 0.72);
+        color: #fff;
+        cursor: pointer;
+        transform: translateY(-50%);
+        transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .preview-arrow:hover {
+        border-color: rgba(255, 255, 255, 0.48);
+        background: rgba(39, 43, 53, 0.92);
+        transform: translateY(-50%) scale(1.06);
+      }
+
+      .preview-arrow:focus-visible {
+        outline: 2px solid #a5c4ff;
+        outline-offset: 3px;
+      }
+
+      .preview-arrow svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .preview-arrow-previous {
+        left: 16px;
+      }
+
+      .preview-arrow-next {
+        right: 16px;
+      }
+
+      .preview-gallery-count {
+        position: absolute;
+        z-index: 2;
+        right: 18px;
+        bottom: 15px;
+        padding: 6px 9px;
+        border-radius: 999px;
+        background: rgba(8, 9, 12, 0.7);
+        color: #f5f5f7;
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      @media (max-width: 700px) {
+        .preview-arrow {
+          width: 38px;
+          height: 38px;
+        }
+
+        .preview-arrow-previous {
+          left: 10px;
+        }
+
+        .preview-arrow-next {
+          right: 10px;
+        }
+
+        .preview-gallery-label {
+          top: 10px;
+          left: 10px;
+          font-size: 9px;
+        }
+
+        .preview-gallery-count {
+          right: 10px;
+          bottom: 10px;
+        }
       }
 
       .privacy-preview-video {
@@ -1040,79 +1145,96 @@
           <div class="section-heading">
             <div class="eyebrow">Right there when you need it</div>
             <h2 id="preview-title">Your day,  in the moment.</h2>
-            <p>Click a moment to see how Dynamic brings your Mac's live activity to life.</p>
+            <p>Explore the video gallery—choose a moment or use the arrows to watch each demo.</p>
           </div>
           <div class="preview-stage" data-mode="music">
-            <video
-              class="preview-video music-preview-video"
-              src="music-island.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="auto"
-              aria-label="Music playback displayed in Dynamic"
-            ></video>
-            <video
-              class="preview-video wifi-preview-video"
-              src="wifi.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="auto"
-              aria-label="Wi-Fi activity displayed in Dynamic"
-            ></video>
-            <video
-              class="preview-video indicator-preview-video"
-              src="island-indicator.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-label="Dynamic status indicator preview"
-            ></video>
-            <video
-              class="preview-video privacy-preview-video"
-              src="privacy-island.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-label="Privacy activity displayed in Dynamic"
-            ></video>
-            <video
-              class="preview-video bluetooth-preview-video"
-              src="bluetooth.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-label="Bluetooth status displayed in Dynamic"
-            ></video>
-            <video
-              class="preview-video caplock-preview-video"
-              src="caplock.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-label="Caps Lock status displayed in Dynamic"
-            ></video>
-            <video
-              class="preview-video battery-preview-video"
-              src="battery-island.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-label="Battery status displayed in Dynamic"
-            ></video>
+            <span class="preview-gallery-label">VIDEO GALLERY</span>
+            <div class="preview-media">
+              <video
+                class="preview-video music-preview-video is-active"
+                data-mode="music"
+                src="music-island.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+                aria-label="Music playback displayed in Dynamic"
+              ></video>
+              <video
+                class="preview-video wifi-preview-video"
+                data-mode="wifi"
+                src="wifi.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+                aria-label="Wi-Fi activity displayed in Dynamic"
+              ></video>
+              <video
+                class="preview-video indicator-preview-video"
+                data-mode="indicator"
+                src="island-indicator.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Dynamic status indicator preview"
+              ></video>
+              <video
+                class="preview-video privacy-preview-video"
+                data-mode="privacy"
+                src="privacy-island.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Privacy activity displayed in Dynamic"
+              ></video>
+              <video
+                class="preview-video bluetooth-preview-video"
+                data-mode="bluetooth"
+                src="bluetooth.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Bluetooth status displayed in Dynamic"
+              ></video>
+              <video
+                class="preview-video caplock-preview-video"
+                data-mode="caplock"
+                src="caplock.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Caps Lock status displayed in Dynamic"
+              ></video>
+              <video
+                class="preview-video battery-preview-video"
+                data-mode="battery"
+                src="battery-island.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Battery status displayed in Dynamic"
+              ></video>
+            </div>
+            <button class="preview-arrow preview-arrow-previous" type="button" aria-label="Previous demo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="preview-arrow preview-arrow-next" type="button" aria-label="Next demo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <span class="preview-gallery-count" data-gallery-count aria-live="polite">1 / 7</span>
             <div class="preview-island" aria-live="polite">
               <div class="island-art" data-preview-icon>♫</div>
               <div class="island-copy">
@@ -1287,6 +1409,9 @@
 
       const buttons = document.querySelectorAll(".demo-tab");
       const previewStage = document.querySelector(".preview-stage");
+      const previewMedia = document.querySelector(".preview-media");
+      const galleryCount = document.querySelector("[data-gallery-count]");
+      const demoModes = Array.from(buttons, (button) => button.dataset.mode);
       const previewVideos = {
         music: document.querySelector(".music-preview-video"),
         wifi: document.querySelector(".wifi-preview-video"),
@@ -1297,10 +1422,17 @@
         bluetooth: document.querySelector(".bluetooth-preview-video"),
       };
       let isPreviewVisible = false;
+      let activeMode = previewStage.dataset.mode;
+      let selectedMode = activeMode;
+      let previewTransitionTimeout;
+      let previewTransitionId = 0;
+      const previewFadeDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? 0
+        : 450;
 
       function updatePreviewPlayback() {
         Object.entries(previewVideos).forEach(([modeName, video]) => {
-          if (isPreviewVisible && previewStage.dataset.mode === modeName) {
+          if (isPreviewVisible && [activeMode, selectedMode].includes(modeName)) {
             video.play().catch((error) => {
               if (error.name !== "AbortError") {
                 console.error(`The ${modeName} preview video could not be played.`, error);
@@ -1314,30 +1446,68 @@
 
       function updatePreview(modeName) {
         const mode = modes[modeName];
-        if (!mode) return;
+        if (!mode || modeName === selectedMode) return;
 
-        previewStage.dataset.mode = modeName;
+        selectedMode = modeName;
+        window.clearTimeout(previewTransitionTimeout);
+        const transitionId = ++previewTransitionId;
+        previewMedia.querySelectorAll(".is-next").forEach((video) => {
+          video.classList.remove("is-next");
+        });
+
+        if (modeName === activeMode) {
+          updatePreviewPlayback();
+          return;
+        }
+
+        const nextVideo = previewVideos[modeName];
+        nextVideo.classList.add("is-next");
         updatePreviewPlayback();
 
-        document.querySelectorAll("[data-preview-icon]").forEach((element) => {
-          element.textContent = mode.icon;
-        });
-        document.querySelectorAll("[data-preview-title]").forEach((element) => {
-          element.textContent = mode.title;
-        });
-        document.querySelectorAll("[data-preview-detail]").forEach((element) => {
-          element.textContent = mode.detail;
-        });
-        document.querySelectorAll("[data-preview-action]").forEach((element) => {
-          element.innerHTML = mode.action;
-        });
-        buttons.forEach((button) => {
-          button.setAttribute("aria-pressed", String(button.dataset.mode === modeName));
-        });
+        previewTransitionTimeout = window.setTimeout(() => {
+          if (transitionId !== previewTransitionId) return;
+
+          previewVideos[activeMode].classList.remove("is-active");
+          nextVideo.classList.remove("is-next");
+          nextVideo.classList.add("is-active");
+          activeMode = modeName;
+          previewStage.dataset.mode = modeName;
+          updatePreviewPlayback();
+
+          document.querySelectorAll("[data-preview-icon]").forEach((element) => {
+            element.textContent = mode.icon;
+          });
+          document.querySelectorAll("[data-preview-title]").forEach((element) => {
+            element.textContent = mode.title;
+          });
+          document.querySelectorAll("[data-preview-detail]").forEach((element) => {
+            element.textContent = mode.detail;
+          });
+          document.querySelectorAll("[data-preview-action]").forEach((element) => {
+            element.innerHTML = mode.action;
+          });
+          buttons.forEach((button) => {
+            button.setAttribute("aria-pressed", String(button.dataset.mode === modeName));
+          });
+          galleryCount.textContent = `${demoModes.indexOf(modeName) + 1} / ${demoModes.length}`;
+        }, previewFadeDuration);
       }
 
       buttons.forEach((button) => {
         button.addEventListener("click", () => updatePreview(button.dataset.mode));
+      });
+
+      function stepPreview(direction) {
+        const currentIndex = demoModes.indexOf(selectedMode);
+        const nextIndex = (currentIndex + direction + demoModes.length) % demoModes.length;
+        updatePreview(demoModes[nextIndex]);
+      }
+
+      document.querySelector(".preview-arrow-previous").addEventListener("click", () => {
+        stepPreview(-1);
+      });
+      document.querySelector(".preview-arrow-next").addEventListener("click", () => {
+        stepPreview(1);
       });
 
       const previewObserver = new IntersectionObserver(([entry]) => {
