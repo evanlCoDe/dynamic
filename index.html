@@ -398,6 +398,214 @@
         object-fit: cover;
       }
 
+      .assistant-section {
+        border-top: 1px solid var(--line);
+        background:
+          radial-gradient(ellipse at 50% 0%, rgba(52, 94, 171, 0.1), transparent 48%),
+          linear-gradient(180deg, #0d0e13, #101116);
+      }
+
+      .assistant-beta-badge {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 10px;
+        padding: 6px 9px;
+        border: 1px solid rgba(141, 180, 255, 0.28);
+        border-radius: 999px;
+        background: rgba(107, 151, 232, 0.1);
+        color: #a6c5ff;
+        font-size: 10px;
+        font-weight: 650;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        vertical-align: text-top;
+      }
+
+      .section-heading .assistant-beta-note {
+        max-width: 580px;
+        margin: 18px auto 0;
+        color: #858995;
+        font-size: 13px;
+      }
+
+      .assistant-activation {
+        display: grid;
+        gap: 20px;
+        margin: -24px auto 36px;
+        padding: 22px 26px;
+        border: 1px solid rgba(141, 180, 255, 0.25);
+        border-radius: 22px;
+        background: linear-gradient(135deg, rgba(91, 128, 196, 0.13), rgba(255, 255, 255, 0.025));
+      }
+
+      .assistant-activation-copy {
+        margin: 0;
+        color: #e2e4eb;
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .assistant-activation-copy strong {
+        color: #a6c5ff;
+      }
+
+      .assistant-steps {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: assistant-step;
+      }
+
+      .assistant-steps li {
+        display: flex;
+        align-items: flex-start;
+        gap: 11px;
+        color: #b6b8c2;
+        font-size: 13px;
+        line-height: 1.5;
+        counter-increment: assistant-step;
+      }
+
+      .assistant-steps li::before {
+        display: grid;
+        width: 25px;
+        height: 25px;
+        flex: 0 0 25px;
+        place-items: center;
+        border: 1px solid rgba(141, 180, 255, 0.26);
+        border-radius: 50%;
+        background: rgba(107, 151, 232, 0.1);
+        color: #a6c5ff;
+        content: counter(assistant-step);
+        font-size: 11px;
+        font-weight: 650;
+      }
+
+      .assistant-commands {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 9px;
+        margin: 0 auto 40px;
+      }
+
+      .assistant-command {
+        padding: 9px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        color: #d7d9e0;
+        font-size: 12px;
+      }
+
+      .assistant-demo {
+        width: min(920px, 100%);
+        margin: 0 auto 48px;
+      }
+
+      .assistant-video-frame {
+        aspect-ratio: 1660 / 1080;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 25px;
+        background: #000;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      }
+
+      .assistant-video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .assistant-demo figcaption {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 18px;
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .assistant-built-in {
+        color: #a6c5ff;
+      }
+
+      .assistant-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .assistant-card {
+        padding: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 22px;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
+        transition: border-color 180ms ease, transform 180ms ease;
+      }
+
+      .assistant-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(141, 180, 255, 0.28);
+      }
+
+      .assistant-card h3 {
+        margin: 0 0 22px;
+        font-size: 19px;
+        font-weight: 600;
+        letter-spacing: -0.035em;
+      }
+
+      .assistant-action-list,
+      .assistant-benefit-list {
+        display: grid;
+        gap: 17px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .assistant-action-list li {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        color: #b6b8c2;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .assistant-action-list strong {
+        min-width: 43px;
+        color: #a6c5ff;
+        font-weight: 600;
+      }
+
+      .assistant-benefit-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 11px;
+        color: #b6b8c2;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .assistant-benefit-list li::before {
+        width: 6px;
+        height: 6px;
+        flex: 0 0 6px;
+        margin-top: 6px;
+        border-radius: 50%;
+        background: #75a8ff;
+        box-shadow: 0 0 10px rgba(117, 168, 255, 0.55);
+        content: "";
+      }
+
       .section {
         padding: 128px 24px;
       }
@@ -995,6 +1203,27 @@
           grid-template-columns: 1fr;
         }
 
+        .assistant-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .assistant-steps {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .assistant-activation {
+          padding: 20px;
+        }
+
+        .assistant-card {
+          padding: 24px;
+        }
+
+        .assistant-video-frame {
+          border-radius: 18px;
+        }
+
         .feature-card {
           min-height: 0;
         }
@@ -1276,6 +1505,75 @@
               preload="auto"
               aria-label="Two simultaneous activities displayed in Dynamic"
             ></video>
+          </div>
+        </div>
+      </section>
+
+      <section class="section assistant-section" aria-labelledby="assistant-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div class="eyebrow">A feature built into Dynamic</div>
+            <h2 id="assistant-title">Meet Dynamic Assistant <span class="assistant-beta-badge">BETA</span></h2>
+            <p>
+              <strong>Your Mac, just a little easier.</strong><br />
+              Dynamic Assistant lets you control everyday app actions with simple natural language commands, right from Dynamic Island.
+            </p>
+            <p class="assistant-beta-note">
+              Dynamic Assistant is currently in beta. Features and functionality may change as we continue improving the experience.
+            </p>
+          </div>
+          <div class="assistant-activation" role="group" aria-label="How to activate Dynamic Assistant">
+            <p class="assistant-activation-copy">
+              <strong>How to activate:</strong> Simply double-click anywhere on the Main Island to open Dynamic Assistant.
+            </p>
+            <ol class="assistant-steps">
+              <li>Double-click the Main Island.</li>
+              <li>Type a command in the assistant's input field.</li>
+              <li>Press Enter to execute the command.</li>
+            </ol>
+          </div>
+          <div class="assistant-commands" aria-label="Example commands">
+            <span class="assistant-command">“Open Safari”</span>
+            <span class="assistant-command">“Close Spotify”</span>
+            <span class="assistant-command">“Quit Google Chrome”</span>
+            <span class="assistant-command">“Open Xcode”</span>
+          </div>
+          <figure class="assistant-demo">
+            <div class="assistant-video-frame">
+              <video
+                class="assistant-video"
+                src="assistant-demo.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Dynamic Assistant demo showing app commands from Dynamic Island"
+              ></video>
+            </div>
+            <figcaption>
+              <span>Assistant input and command feedback appear directly in Dynamic Island.</span>
+              <span class="assistant-built-in">Part of Dynamic. No extra app to open.</span>
+            </figcaption>
+          </figure>
+          <div class="assistant-grid">
+            <article class="assistant-card">
+              <h3>Three simple actions</h3>
+              <ul class="assistant-action-list">
+                <li><strong>Open</strong><span>Launch an app or bring it to the front.</span></li>
+                <li><strong>Close</strong><span>Close an app's windows while keeping it running in the background.</span></li>
+                <li><strong>Quit</strong><span>Completely quit an app.</span></li>
+              </ul>
+            </article>
+            <article class="assistant-card">
+              <h3>Designed for simplicity</h3>
+              <ul class="assistant-benefit-list">
+                <li>Opens directly from Dynamic Island.</li>
+                <li>Understands simple, natural-language commands.</li>
+                <li>Features a clean, native macOS-style interface.</li>
+                <li>Keeps your workflow simple without opening another application.</li>
+              </ul>
+            </article>
           </div>
         </div>
       </section>
